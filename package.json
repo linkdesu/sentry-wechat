@@ -1,31 +1,41 @@
 {
-  "name": "drone-wechat",
-  "version": "2.0.0",
-  "description": "drone wechat notification plugin",
-  "main": "index.js",
-  "scripts": {
-    "test": "npm run eslint && npm run test-cov",
-    "test-cov": "nyc ava test.js && nyc report --reporter=html",
-    "eslint": "eslint index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lizheming/drone-wechat.git"
-  },
+  "name": "sentry-wechat",
+  "version": "1.0.0",
+  "description": "Wechat notification service for Sentry.",
+  "author": "Link <xieaolin@foxmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/linkdesu/sentry-wechat#readme",
   "keywords": [
-    "drone",
-    "plugin",
+    "sentry",
+    "webhook",
     "wechat",
     "node"
   ],
-  "author": "lizheming <i@imnerd.org>",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lizheming/drone-wechat/issues"
+    "url": "https://github.com/linkdesu/sentry-wechat/issues"
   },
-  "homepage": "https://github.com/lizheming/drone-wechat#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linkdesu/sentry-wechat.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env nodemon index.js",
+    "lint": "cross-env eslint index.js",
+    "test": "cross-env NODE_ENV=testing npm run eslint && nyc ava test && nyc report --reporter=html",
+    "start": "cross-env NODE_ENV=production node index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*"
+    ],
+    "delay": "1000"
+  },
   "dependencies": {
-    "drone-render": "^1.0.0",
+    "cross-env": "^5.2.0",
+    "dotenv": "^6.0.0",
+    "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5"
   },
@@ -34,6 +44,7 @@
     "eslint": "^4.14.0",
     "eslint-config-think": "^1.0.2",
     "mock-require": "^2.0.2",
+    "nodemon": "^1.18.4",
     "nyc": "^11.4.1"
   }
 }

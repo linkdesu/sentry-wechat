@@ -1,13 +1,16 @@
-FROM mhart/alpine-node:8.9.3
+FROM node:8-alpine
 
-LABEL maintainer="lizheming <i@imnerd.org>" \
-  org.label-schema.name="Drone Wechat Notification" \
-  org.label-schema.vendor="lizheming" \
-  org.label-schema.schema-version="1.2.0"
+LABEL maintainer="Link <xieaolin@foxmail.com>"
 
-WORKDIR /wechat
-COPY package.json /wechat/package.json
+WORKDIR /var/www
+COPY lib/ ./lib/
+COPY *.js ./
+COPY package* ./
+
 RUN npm install --production --registry=https://registry.npm.taobao.org
 
-COPY index.js /wechat/index.js
-ENTRYPOINT [ "node", "/wechat/index.js" ]
+ENV HOST 0.0.0.0
+ENV PORT 3000
+
+EXPOSE 3000
+CMD ["npm", "run", "start"]
